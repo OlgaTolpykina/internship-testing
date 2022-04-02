@@ -1,0 +1,35 @@
+.App {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+  background-color: #282c34;
+}
+
+.App-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-title {
+  width: 100%;
+}
+
+.App-subtitle {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+}
