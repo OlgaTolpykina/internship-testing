@@ -4,33 +4,38 @@ import './App.css';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.startOrStopTimer = this.startOrStopTimer.bind(this);
+    this.startTimer = this.startTimer.bind(this);
     this.pauseTimer = this.pauseTimer.bind(this);
+    this.stopTimer = this.stopTimer.bind(this);
     this.state = {
-      timeLeft: null,
+      timeLeft: 0,
+      timer: null
     }
   }
 
-  startOrStopTimer(time, name) {
-    let isPaused = false;
-    if (name === "Пауза") {
-        isPaused = true;
-    } 
-    let timeLeft = time;
+  startTimer(time) {
+    clearInterval(this.state.timer);
+    let timeToCount;
+    timeToCount = this.state.timeLeft;
     let timer = setInterval(() => {
-      timeLeft = timeLeft - 1;
-      if (timeLeft === 0) {
+      timeToCount = timeToCount + 1;
+      if (timeToCount === +time) {
         clearInterval(timer);
       }
       this.setState({
-        timeLeft: timeLeft
+        timeLeft: timeToCount
       })
     }, 1000);
-    return this.setState({timeLeft: timeLeft})
+    return this.setState({timeLeft: timeToCount, timer: timer});
   }
 
   pauseTimer() {
+    clearInterval(this.state.timer);
+  }
 
+  stopTimer() {
+    clearInterval(this.state.timer);
+    return this.setState({timeLeft: 0});
   }
 
   render() {
@@ -38,9 +43,9 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <h2>Timer</h2>
-          <Button name="Запуск" time="10" doAction={this.startOrStopTimer}/>
-          <Button name="Пауза" doAction={this.startOrStopTimer}/>
-          <Button name="Стоп" doAction={this.startOrStopTimer}/>
+          <Button name="Запуск" time="10" doAction={this.startTimer}/>
+          <Button name="Пауза" doAction={this.pauseTimer}/>
+          <Button name="Стоп" doAction={this.stopTimer}/>
           <TimerDisplay timeLeft={this.state.timeLeft}/>
         </header>
       </div>
@@ -50,7 +55,7 @@ class App extends React.Component {
 
 class Button extends React.Component {
   handleTimer() {
-    return this.props.doAction(this.props.time, this.props.name);
+    return this.props.doAction(this.props.time);
   }
 
   render() {
