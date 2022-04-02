@@ -16,8 +16,7 @@ class App extends React.Component {
 
   startTimer(time) {
     clearInterval(this.state.timer);
-    let timeToCount;
-    timeToCount = this.state.timeLeft;
+    let timeToCount = (this.state.timeLeft < time) ? this.state.timeLeft : 0;
     let timer = setInterval(() => {
       timeToCount = timeToCount + 1;
       if (timeToCount === +time) {
@@ -69,7 +68,7 @@ class Button extends React.Component {
 
 class TimerDisplay extends React.Component {
   render() {
-    return <div className='App-subtitle'>Осталось времени: {this.props.timeLeft}</div>
+    return <div className='App-subtitle'>Осталось времени: <p>{this.props.timeLeft}</p></div>
   }
 }
 
