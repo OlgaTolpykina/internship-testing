@@ -1,4 +1,5 @@
 import React from 'react';
+import ButtonTag from '@mui/material/Button';
 import './App.css';
 
 class App extends React.Component {
@@ -42,11 +43,13 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h2>Timer</h2>
-          <Button name="Запуск" time="10" doAction={this.startTimer}/>
-          <Button name="Пауза" doAction={this.pauseTimer}/>
-          <Button name="Стоп" doAction={this.stopTimer}/>
+          <h2 className='App-title'>Timer</h2>
           <TimerDisplay timeLeft={this.state.timeLeft}/>
+          <div className='button-wrapper'>
+            <Button name="Запуск" time="10" doAction={this.startTimer}/>
+            <Button name="Пауза" doAction={this.pauseTimer}/>
+            <Button name="Стоп" doAction={this.stopTimer}/>
+          </div>
         </header>
       </div>
     );
@@ -59,14 +62,14 @@ class Button extends React.Component {
   }
 
   render() {
-    return <button onClick={this.handleTimer.bind(this)}>{this.props.name}</button>
+    return <ButtonTag className='App-button' variant="contained" onClick={this.handleTimer.bind(this)}>{this.props.name}</ButtonTag>
   }
 
 }
 
 class TimerDisplay extends React.Component {
   render() {
-    return <div>Осталось времени: {this.props.timeLeft}</div>
+    return <div className='App-subtitle'>Осталось времени: {this.props.timeLeft}</div>
   }
 }
 
